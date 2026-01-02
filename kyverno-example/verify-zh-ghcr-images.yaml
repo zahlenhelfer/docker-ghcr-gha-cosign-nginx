@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: verify-zh-ghcr-images
+spec:
+  validationFailureAction: Enforce
+  background: false
+  rules:
+    - name: verify-image-signature
+      match:
+        resources:
+          kinds:
+            - Pod
+          namespaces:
+            - signed
+      verifyImages:
+        - imageReferences:
+            - "ghcr.io/zahlenhelfer/*"
+          verifyDigest: true
+          attestors:
+            - entries:
+                - keyless:
+                    issuer: "https://token.actions.githubusercontent.com"
+                    subject: "https://github.com/zahlenhelfer/docker-ghcr-gha-cosign-nginx/.github/workflows/release.yml@refs/heads/main"
+                    rekor:
+                      url: "https://rekor.sigstore.dev"

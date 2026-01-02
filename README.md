@@ -1,5 +1,8 @@
-# docker-custom-nginx
-[![Build Status](https://github.com/zahlenhelfer/docker-ghcr-ghaction-nginx/workflows/publish/badge.svg)](https://github.com/zahlenhelfer/docker-ghcr-ghaction-nginx/actions)
+# Example of Building Container Images & signing & verification
 
-NGINX container showing how to use GitHub Container Registry
+[![Build Status](https://github.com/zahlenhelfer/docker-ghcr-gha-cosign-nginx/workflows/publish/badge.svg)](https://github.com/zahlenhelfer/docker-ghcr-gha-cosign-nginx/actions)
 
+- GitHub Container Registry for Storing
+- GitHub Actions to build a Container Image
+- Cosign for Keyless (OIDC) signing
+- Kyverno (K8s) Example for verification (`kyverno-example` folder)

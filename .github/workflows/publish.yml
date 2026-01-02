@@ -39,27 +39,43 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - id: docker_meta
+      # ------------------------------------------------------------
+      # ✅ Generate GOOD tags
+      # ------------------------------------------------------------
+      - name: Docker metadata
+        id: meta
         uses: docker/metadata-action@v5.7.0
         with:
           images: ghcr.io/zahlenhelfer/docker-ghcr-gha-cosign-nginx
-          tags: type=sha,format=long
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short,prefix=sha-
 
-      - name: Build and Push container images
+      # ------------------------------------------------------------
+      # ✅ Build & push
+      # ------------------------------------------------------------
+      - name: Build and push
+        id: build
         uses: docker/build-push-action@v6.18.0
-        id: build-and-push
         with:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
 
-      - name: Sign the images with GitHub OIDC Token
+      # ------------------------------------------------------------
+      # ✅ Sign ALL tags by DIGEST (correct)
+      # ------------------------------------------------------------
+      - name: Sign images (Cosign keyless)
         env:
-          DIGEST: ${{ steps.build-and-push.outputs.digest }}
-          TAGS: ${{ steps.docker_meta.outputs.tags }}
+          DIGEST: ${{ steps.build.outputs.digest }}
+          TAGS: ${{ steps.meta.outputs.tags }}
         run: |
           images=""
           for tag in ${TAGS}; do
             images+="${tag}@${DIGEST} "
           done
+
+          echo "Signing:"
+          echo "${images}"
+
           cosign sign --yes ${images}
