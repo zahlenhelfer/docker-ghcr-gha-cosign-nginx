@@ -15,7 +15,7 @@ spec:
             - signed
       verifyImages:
         - imageReferences:
-            - "ghcr.io/zahlenhelfer/docker-ghcr-gha-cosign-nginx/*"
+            - "ghcr.io/zahlenhelfer/docker-ghcr-gha-cosign-nginx*"
           verifyDigest: true
           attestors:
             - entries:
