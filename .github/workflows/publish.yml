@@ -40,7 +40,7 @@ jobs:
                   password: ${{ secrets.GITHUB_TOKEN }}
 
             - id: docker_meta
-              uses: docker/metadata-action@v5.7.0
+              uses: docker/metadata-action@v5.10.0
               with:
                   images: ghcr.io/zahlenhelfer/docker-ghcr-gha-cosign-nginx
                   tags: type=sha,format=long
