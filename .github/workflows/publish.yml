@@ -61,6 +61,7 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          annotations: ${{ steps.meta.outputs.annotations }}
 
       # ------------------------------------------------------------
       # ✅ Sign ALL tags by DIGEST (correct)
