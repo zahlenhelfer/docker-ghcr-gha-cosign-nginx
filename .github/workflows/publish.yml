@@ -1,3 +1,5 @@
+name: Build GHCR Container Image
+
 on:
   push:
     branches:

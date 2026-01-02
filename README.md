@@ -5,4 +5,4 @@
 - GitHub Container Registry for Storing
 - GitHub Actions to build a Container Image
 - Cosign for Keyless (OIDC) signing
-- Kyverno (K8s) Example for verification (`kyverno-example` folder)
+- Kyverno (K8s) Example for verification (WIP)
