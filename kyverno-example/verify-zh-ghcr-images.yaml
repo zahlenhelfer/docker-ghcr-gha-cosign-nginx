@@ -15,12 +15,12 @@ spec:
             - signed
       verifyImages:
         - imageReferences:
-            - "ghcr.io/zahlenhelfer/*"
+            - "ghcr.io/zahlenhelfer/docker-ghcr-gha-cosign-nginx/*"
           verifyDigest: true
           attestors:
             - entries:
                 - keyless:
                     issuer: "https://token.actions.githubusercontent.com"
-                    subject: "https://github.com/zahlenhelfer/docker-ghcr-gha-cosign-nginx/.github/workflows/release.yml@refs/heads/main"
+                    subjectRegExp: ^repo:zahlenhelfer/docker-ghcr-gha-cosign-nginx:.*
                     rekor:
                       url: "https://rekor.sigstore.dev"
