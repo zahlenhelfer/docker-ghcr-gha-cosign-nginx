@@ -46,7 +46,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5.7.0
         with:
-          images: ghcr.io/zahlenhelfer/docker-ghcr-gha-cosign-nginx
+          images: ghcr.io/${{ github.repository }}
           tags: |
             type=raw,value=latest
             type=sha,format=short,prefix=sha-
